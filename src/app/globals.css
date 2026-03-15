@@ -1,0 +1,19 @@
+@import "tailwindcss";
+
+@theme {
+  --color-zoo-green: #006400;
+  --color-zoo-green-light: #3b6e47;
+  --color-zoo-green-hover: #004d00;
+  --color-zoo-cream: #FAF9F6;
+  --color-zoo-bg: #f0f5f5;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  color: #333;
+}
+
+/* Star ratings */
+.stars {
+  color: #f59e0b;
+}
