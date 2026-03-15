@@ -71,7 +71,7 @@ include 'config2.php';
                 }
                 ?>
             </div>
-            <a href="cntform.php" class="btn btn-success btn-lg mt-3">Leave a Review</a>
+            <!-- <a href="submit_review.php" class="btn btn-success btn-lg mt-3">Leave a Review</a> -->
         </div>
     </section>
 
@@ -108,7 +108,7 @@ include 'config2.php';
         <div class="container_homepage text-center">
             <h2>Plan Your Visit</h2>
             <p>Our zoo is open every day from 9 AM to 6 PM. Come and explore the wild! Get your tickets online or at the gate.</p>
-            <a href="infreserv.php" class="btn btn-success btn-lg">Buy Tickets Now</a>
+            <!-- <a href="book.php" class="btn btn-success btn-lg">Buy Tickets Now</a> -->
         </div>
     </section>
 
