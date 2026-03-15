@@ -1,0 +1,13 @@
+# Dependencies
+vendor/
+
+# Configuration with credentials
+config2.php
+
+# Environment files
+.env
+.env.*
+
+# OS files
+.DS_Store
+Thumbs.db

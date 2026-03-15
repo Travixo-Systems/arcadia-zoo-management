@@ -124,7 +124,7 @@ $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
         <h1>Manage Users</h1>
         <!-- Return to Admin Dashboard link -->
         <div style="text-align: right; margin-top: 10px; margin-right: 10px;">
-            <a href="admin_dashboard.php" style="text-decoration: none; font-weight: bold;">Return to Admin Dashboard</a>
+            <a href="dash.php" style="text-decoration: none; font-weight: bold;">Return to Admin Dashboard</a>
         </div>
 
         <h2>User List</h2>

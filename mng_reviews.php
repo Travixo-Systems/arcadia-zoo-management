@@ -126,7 +126,7 @@
             header("Refresh:0"); // Refresh the page after deleting
         }
         ?>
-        <a href="admin_dashboard.php" class="btn btn-primary mt-4">Return to Dashboard</a>
+        <a href="dash.php" class="btn btn-primary mt-4">Return to Dashboard</a>
     </div>
 </body>
 
