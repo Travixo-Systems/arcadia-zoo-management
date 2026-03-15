@@ -142,11 +142,11 @@ try {
 
         <section>
             <h2>FAQ</h2>
-            <p><a href="faq.php">Click here</a> to view frequently asked questions.</p>
+            <p><a href="#">Click here</a> to view frequently asked questions.</p>
         </section>
 
         <section>
-            <p>For more details on how we handle your information, please read our <a href="privacy_policy.php">Privacy Policy</a>.</p>
+            <p>For more details on how we handle your information, please read our <a href="#">Privacy Policy</a>.</p>
         </section>
 
         <a href="services.php">Return to Services</a>

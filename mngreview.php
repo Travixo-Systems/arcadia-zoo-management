@@ -125,7 +125,7 @@
             exit;
         }
         ?>
-        <a href="admin_dashboard.php" class="btn">Return to Dashboard</a>
+        <a href="dash.php" class="btn">Return to Dashboard</a>
     </div>
 
     <!-- Optional: Add jQuery or any other JavaScript framework if needed -->
