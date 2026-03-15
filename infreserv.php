@@ -123,16 +123,16 @@ try {
         <section>
             <h2>Follow Us</h2>
             <p>
-                <a href="https://facebook.com/yourzoo">Facebook</a><br>
-                <a href="https://twitter.com/yourzoo">Twitter</a><br>
-                <a href="https://instagram.com/yourzoo">Instagram</a><br>
-                <a href="https://linkedin.com/company/yourzoo">LinkedIn</a>
+                <a href="#">Facebook</a><br>
+                <a href="#">Twitter</a><br>
+                <a href="#">Instagram</a><br>
+                <a href="#">LinkedIn</a>
             </p>
         </section>
 
         <section>
             <h2>Location Map</h2>
-            <iframe src="https://www.google.com/maps/embed?pb=YOUR_MAP_EMBED_LINK" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+            <!-- Add Google Maps embed URL here -->
         </section>
 
         <section>

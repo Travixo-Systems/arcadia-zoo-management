@@ -8,6 +8,9 @@ config2.php
 .env
 .env.*
 
+# Logs
+*.log
+
 # OS files
 .DS_Store
 Thumbs.db
