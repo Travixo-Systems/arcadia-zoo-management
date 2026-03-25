@@ -52,32 +52,32 @@ ON CONFLICT (type) DO NOTHING;
 -- HABITATS
 -- ---------------------------------------------------------
 INSERT INTO habitats (name, image_url) VALUES
-  ('Savanna', '/images/habitats/savanna.jpg'),
-  ('Jungle', '/images/habitats/jungle.jpg'),
-  ('Arctic', '/images/habitats/arctic.jpg'),
-  ('Desert', '/images/habitats/desert.jpg'),
-  ('Wetlands', '/images/habitats/wetlands.jpg'),
-  ('Mountain', '/images/habitats/mountain.jpg'),
-  ('Tropical Aviary', '/images/habitats/tropical-aviary.jpg'),
-  ('Reptile House', '/images/habitats/reptile-house.jpg'),
-  ('Aquatic Zone', '/images/habitats/aquatic-zone.jpg'),
-  ('Rainforest Dome', '/images/habitats/rainforest-dome.jpg')
+  ('Savanna', 'https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?w=800&q=80'),
+  ('Jungle', 'https://images.unsplash.com/photo-1440342359743-84fcb8c21f21?w=800&q=80'),
+  ('Arctic', 'https://images.unsplash.com/photo-1462275646964-a0e3c11f18a6?w=800&q=80'),
+  ('Desert', 'https://images.unsplash.com/photo-1509316785289-025f5b846b35?w=800&q=80'),
+  ('Wetlands', 'https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=800&q=80'),
+  ('Mountain', 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=800&q=80'),
+  ('Tropical Aviary', 'https://images.unsplash.com/photo-1552728089-57bdde30beb3?w=800&q=80'),
+  ('Reptile House', 'https://images.unsplash.com/photo-1504450874802-0ba2bcd659e0?w=800&q=80'),
+  ('Aquatic Zone', 'https://images.unsplash.com/photo-1437622368342-7a3d73a34c8f?w=800&q=80'),
+  ('Rainforest Dome', 'https://images.unsplash.com/photo-1448375240586-882707db888b?w=800&q=80')
 ON CONFLICT (name) DO NOTHING;
 
 -- ---------------------------------------------------------
 -- SERVICES
 -- ---------------------------------------------------------
 INSERT INTO services (name, description, price, availability_schedule, image_url) VALUES
-  ('Guided Safari Tour', 'Explore the savanna with our expert guides.', 25.00, 'Daily 10:00 - 16:00', '/images/services/guided-safari.jpg'),
-  ('Night Safari', 'Experience the zoo after dark with a guided group.', 35.00, 'Friday-Saturday 20:00 - 23:00', '/images/services/night-safari.jpg'),
-  ('Animal Encounter', 'Meet selected animals with a trained keeper.', 15.00, 'Daily 11:00 - 15:00', '/images/services/animal-encounter.jpg'),
-  ('Junior Zookeeper Workshop', 'Hands-on educational workshop for children.', 18.00, 'Wednesday-Sunday 14:00', '/images/services/junior-zookeeper.jpg'),
-  ('Bird Feeding Experience', 'Participate in a supervised aviary feeding session.', 12.00, 'Daily 10:30 - 12:30', '/images/services/bird-feeding.jpg'),
-  ('Reptile Discovery Tour', 'Guided visit through the reptile house.', 20.00, 'Tuesday-Sunday 13:00 - 16:00', '/images/services/reptile-tour.jpg'),
-  ('VIP Behind the Scenes', 'Exclusive access to animal care and staff zones.', 60.00, 'Saturday 09:00 - 11:00', '/images/services/vip-backstage.jpg'),
-  ('Family Explorer Pass', 'Bundled family activity package for 4 visitors.', 75.00, 'Daily', '/images/services/family-pass.jpg'),
-  ('Photography Morning', 'Early-entry pass for wildlife photography lovers.', 40.00, 'Sunday 08:00 - 10:00', '/images/services/photography-morning.jpg'),
-  ('School Education Visit', 'Educational group visit with guided sessions.', 10.00, 'Weekdays by reservation', '/images/services/school-visit.jpg')
+  ('Guided Safari Tour', 'Explore the savanna with our expert guides.', 25.00, 'Daily 10:00 - 16:00', 'https://images.unsplash.com/photo-1516426122078-c23e76319801?w=800&q=80'),
+  ('Night Safari', 'Experience the zoo after dark with a guided group.', 35.00, 'Friday-Saturday 20:00 - 23:00', 'https://images.unsplash.com/photo-1470093851219-69951fcbb533?w=800&q=80'),
+  ('Animal Encounter', 'Meet selected animals with a trained keeper.', 15.00, 'Daily 11:00 - 15:00', 'https://images.unsplash.com/photo-1474511320723-9a56873571b7?w=800&q=80'),
+  ('Junior Zookeeper Workshop', 'Hands-on educational workshop for children.', 18.00, 'Wednesday-Sunday 14:00', 'https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?w=800&q=80'),
+  ('Bird Feeding Experience', 'Participate in a supervised aviary feeding session.', 12.00, 'Daily 10:30 - 12:30', 'https://images.unsplash.com/photo-1444464666168-49d633b86797?w=800&q=80'),
+  ('Reptile Discovery Tour', 'Guided visit through the reptile house.', 20.00, 'Tuesday-Sunday 13:00 - 16:00', 'https://images.unsplash.com/photo-1504450874802-0ba2bcd659e0?w=800&q=80'),
+  ('VIP Behind the Scenes', 'Exclusive access to animal care and staff zones.', 60.00, 'Saturday 09:00 - 11:00', 'https://images.unsplash.com/photo-1503919545889-aef636e10ad4?w=800&q=80'),
+  ('Family Explorer Pass', 'Bundled family activity package for 4 visitors.', 75.00, 'Daily', 'https://images.unsplash.com/photo-1511895426328-dc8714191300?w=800&q=80'),
+  ('Photography Morning', 'Early-entry pass for wildlife photography lovers.', 40.00, 'Sunday 08:00 - 10:00', 'https://images.unsplash.com/photo-1549366021-9f761d450615?w=800&q=80'),
+  ('School Education Visit', 'Educational group visit with guided sessions.', 10.00, 'Weekdays by reservation', 'https://images.unsplash.com/photo-1427504494785-3a9ca7044f45?w=800&q=80')
 ON CONFLICT (name) DO NOTHING;
 
 -- ---------------------------------------------------------
@@ -113,7 +113,7 @@ VALUES
     'Carnivore',
     'Dominant male lion living in the savanna enclosure.',
     'Strong, social, territorial',
-    '/images/animals/simba.jpg',
+    'https://images.unsplash.com/photo-1546182990-dffeafbe841d?w=800&q=80',
     'Panthera leo', '10-14 years', '190 kg / 1.2 m shoulder height', '110 days',
     'Grasslands and open savannas', 'Sub-Saharan Africa',
     'Pride-based social lifestyle',
@@ -125,7 +125,7 @@ VALUES
     'Carnivore',
     'Alert lioness known for agility and maternal behavior.',
     'Fast, observant, cooperative hunter',
-    '/images/animals/nala.jpg',
+    'https://images.unsplash.com/photo-1614027164847-1b28cfe1df60?w=800&q=80',
     'Panthera leo', '10-15 years', '130 kg / 1.1 m shoulder height', '110 days',
     'Savannas', 'Sub-Saharan Africa',
     'Social', 'Excellent hunting coordination'
@@ -136,7 +136,7 @@ VALUES
     'Herbivore',
     'African elephant often seen near the watering area.',
     'Intelligent, calm, protective',
-    '/images/animals/kibo.jpg',
+    'https://images.unsplash.com/photo-1557050543-4d5f4e07ef46?w=800&q=80',
     'Loxodonta africana', '60-70 years', '5000 kg / 3.3 m tall', '22 months',
     'Savannas and woodlands', 'Africa',
     'Herd-based', 'Long trunk and large ears'
@@ -147,7 +147,7 @@ VALUES
     'Herbivore',
     'Tall giraffe feeding mainly on high branches.',
     'Gentle, tall, attentive',
-    '/images/animals/zuri.jpg',
+    'https://images.unsplash.com/photo-1547721064-da6cfb341d50?w=800&q=80',
     'Giraffa camelopardalis', '20-25 years', '800 kg / 5.2 m tall', '15 months',
     'Open woodlands and savannas', 'Africa',
     'Loose social groups', 'Long neck and patterned coat'
@@ -158,7 +158,7 @@ VALUES
     'Herbivore',
     'Young zebra that moves actively with the herd.',
     'Energetic, alert, social',
-    '/images/animals/milo.jpg',
+    'https://images.unsplash.com/photo-1526095179574-86e545346ae6?w=800&q=80',
     'Equus quagga', '20-25 years', '350 kg / 1.4 m tall', '12-13 months',
     'Savannas and grasslands', 'Eastern and Southern Africa',
     'Herd-based', 'Distinct black-and-white stripes'
@@ -169,7 +169,7 @@ VALUES
     'Omnivore',
     'Colorful primate popular with visitors.',
     'Curious, vocal, dominant',
-    '/images/animals/rafiki.jpg',
+    'https://images.unsplash.com/photo-1540573133985-87b6da6d54a9?w=800&q=80',
     'Mandrillus sphinx', '20-30 years', '32 kg / 75 cm', '6 months',
     'Dense tropical forests', 'Central Africa',
     'Group-living', 'Bright blue and red facial markings'
@@ -180,7 +180,7 @@ VALUES
     'Carnivore',
     'Stealthy big cat resting during daytime hours.',
     'Solitary, stealthy, powerful bite',
-    '/images/animals/luna.jpg',
+    'https://images.unsplash.com/photo-1551972873-b7e8754e8e26?w=800&q=80',
     'Panthera onca', '12-15 years', '95 kg / 1.8 m body length', '100 days',
     'Rainforests and wetlands', 'Central and South America',
     'Solitary', 'Rosette-patterned coat'
@@ -191,7 +191,7 @@ VALUES
     'Herbivore',
     'Blue-and-yellow macaw active in the aviary.',
     'Loud, intelligent, social',
-    '/images/animals/azul.jpg',
+    'https://images.unsplash.com/photo-1544923408-75c5cef46f14?w=800&q=80',
     'Ara ararauna', '30-50 years', '1.2 kg / 86 cm wingspan', '28 days incubation',
     'Tropical forests', 'South America',
     'Pair-bonded social bird', 'Bright blue-yellow plumage'
@@ -202,7 +202,7 @@ VALUES
     'Carnivore',
     'Large python kept in a climate-controlled terrarium.',
     'Calm, nocturnal, constrictor',
-    '/images/animals/kaa.jpg',
+    'https://images.unsplash.com/photo-1531386151447-fd76ad50012f?w=800&q=80',
     'Python bivittatus', '20-25 years', '70 kg / 4.5 m', 'Egg-laying',
     'Wetlands and forests', 'Southeast Asia',
     'Solitary', 'Muscular body and camouflage pattern'
@@ -213,7 +213,7 @@ VALUES
     'Carnivore',
     'Large crocodile occupying the wetland basin.',
     'Ambush predator, patient, territorial',
-    '/images/animals/togo.jpg',
+    'https://images.unsplash.com/photo-1564349683136-77e08dba1ef7?w=800&q=80',
     'Crocodylus niloticus', '50-70 years', '500 kg / 4 m', 'Egg-laying',
     'Rivers and marshes', 'Africa',
     'Mostly solitary', 'Armored skin and powerful jaws'
@@ -224,7 +224,7 @@ VALUES
     'Carnivore',
     'Adult polar bear adapted to cold environments.',
     'Strong swimmer, powerful, curious',
-    '/images/animals/nanuk.jpg',
+    'https://images.unsplash.com/photo-1589656966895-2f33e7653571?w=800&q=80',
     'Ursus maritimus', '20-25 years', '450 kg / 2.5 m', '8 months including delayed implantation',
     'Sea ice and arctic coasts', 'Arctic Circle',
     'Mostly solitary', 'White fur and strong forelimbs'
@@ -235,7 +235,7 @@ VALUES
     'Omnivore',
     'Small fox with seasonal coat changes.',
     'Agile, quiet, adaptable',
-    '/images/animals/freya.jpg',
+    'https://images.unsplash.com/photo-1516728778615-2d590ea1855e?w=800&q=80',
     'Vulpes lagopus', '10-14 years', '4 kg / 60 cm', '52 days',
     'Tundra', 'Arctic regions',
     'Pair and family group lifestyle', 'Dense fur and compact body'
@@ -246,7 +246,7 @@ VALUES
     'Herbivore',
     'Dromedary camel used in educational presentations.',
     'Resilient, calm, enduring',
-    '/images/animals/sirocco.jpg',
+    'https://images.unsplash.com/photo-1516476892398-bdcab4c8dab8?w=800&q=80',
     'Camelus dromedarius', '40-50 years', '600 kg / 2 m at hump', '13 months',
     'Deserts and arid plains', 'North Africa and Middle East',
     'Group-living', 'Single hump and water conservation adaptation'
@@ -257,7 +257,7 @@ VALUES
     'Omnivore',
     'Highly active meerkat seen on lookout duty.',
     'Alert, social, playful',
-    '/images/animals/pico.jpg',
+    'https://images.unsplash.com/photo-1577114995803-d8ce0e2b4aa9?w=800&q=80',
     'Suricata suricatta', '12-14 years', '1 kg / 35 cm', '11 weeks',
     'Dry open terrain', 'Southern Africa',
     'Large social colonies', 'Upright sentinel posture'
@@ -268,7 +268,7 @@ VALUES
     'Carnivore',
     'Mountain predator resting on elevated rocks.',
     'Elusive, agile, solitary',
-    '/images/animals/rocky.jpg',
+    'https://images.unsplash.com/photo-1456926631375-92c8ce872def?w=800&q=80',
     'Panthera uncia', '15-18 years', '40 kg / 1.2 m body length', '90-100 days',
     'High mountain ranges', 'Central and South Asia',
     'Solitary', 'Thick tail and spotted coat'
@@ -279,7 +279,7 @@ VALUES
     'Herbivore',
     'Tree-loving red panda active during cool hours.',
     'Shy, climbing specialist, calm',
-    '/images/animals/mira.jpg',
+    'https://images.unsplash.com/photo-1590691566903-692bf5ca7493?w=800&q=80',
     'Ailurus fulgens', '8-14 years', '5 kg / 60 cm', '135 days',
     'Temperate mountain forests', 'Himalayan region',
     'Mostly solitary', 'Reddish fur and ringed tail'
@@ -290,7 +290,7 @@ VALUES
     'Carnivore',
     'Playful otter frequently seen swimming in groups.',
     'Playful, social, agile',
-    '/images/animals/orion.jpg',
+    'https://images.unsplash.com/photo-1580855083542-2dab5b3714a1?w=800&q=80',
     'Lutra lutra', '10-16 years', '9 kg / 1 m', '60-63 days',
     'Rivers, lakes and wetlands', 'Europe and Asia',
     'Small family groups', 'Streamlined body and dense fur'
@@ -301,7 +301,7 @@ VALUES
     'Carnivore',
     'Penguin thriving in the chilled aquatic enclosure.',
     'Social, vocal, fast swimmer',
-    '/images/animals/bubbles.jpg',
+    'https://images.unsplash.com/photo-1551986782-d0169b3f8fa7?w=800&q=80',
     'Spheniscus humboldti', '15-20 years', '4.5 kg / 65 cm', 'Egg-laying',
     'Coastal marine areas', 'South America',
     'Colony-based', 'Countershaded plumage'
@@ -312,7 +312,7 @@ VALUES
     'Omnivore',
     'Colorful toucan with a very active feeding pattern.',
     'Curious, lightweight, expressive',
-    '/images/animals/tina.jpg',
+    'https://images.unsplash.com/photo-1591608971362-f08b2a75731a?w=800&q=80',
     'Ramphastos toco', '15-20 years', '0.8 kg / 60 cm', 'Egg-laying',
     'Tropical forests', 'South America',
     'Small groups', 'Oversized colorful bill'
@@ -323,7 +323,7 @@ VALUES
     'Herbivore',
     'Tapir spending most of the day in shaded muddy areas.',
     'Docile, shy, nocturnal tendency',
-    '/images/animals/diego.jpg',
+    'https://images.unsplash.com/photo-1598894000396-bc30e0996899?w=800&q=80',
     'Tapirus terrestris', '25-30 years', '250 kg / 2 m', '13 months',
     'Rainforests and wetlands', 'South America',
     'Mostly solitary', 'Short flexible snout'
