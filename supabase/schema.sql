@@ -21,7 +21,7 @@ CREATE TABLE IF NOT EXISTS user_role_assignments (
 -- 3. Habitats
 CREATE TABLE IF NOT EXISTS habitats (
   id SERIAL PRIMARY KEY,
-  name TEXT NOT NULL,
+  name TEXT NOT NULL UNIQUE,
   image_url TEXT
 );
 
@@ -36,6 +36,7 @@ CREATE TABLE IF NOT EXISTS animals (
   characteristics TEXT,
   image_url TEXT,
   species TEXT,
+  UNIQUE(prenom, species),
   lifespan TEXT,
   size_weight TEXT,
   gestation TEXT,
@@ -48,7 +49,7 @@ CREATE TABLE IF NOT EXISTS animals (
 -- 5. Services
 CREATE TABLE IF NOT EXISTS services (
   id SERIAL PRIMARY KEY,
-  name TEXT NOT NULL,
+  name TEXT NOT NULL UNIQUE,
   description TEXT NOT NULL,
   price DECIMAL(10,2) NOT NULL DEFAULT 0,
   availability_schedule TEXT,
@@ -132,30 +133,4 @@ CREATE TABLE IF NOT EXISTS animal_clicks (
   UNIQUE(animal_id)
 );
 
--- Seed default admin user (password: admin123 hashed with bcrypt)
-INSERT INTO users (username, password, name, lastname, age)
-VALUES ('admin', '$2a$10$rQEY7gBFpHJnEqJ.6fZGxOuJiYkB2xwLfG2k5q8XqO.uVpQV5dPi', 'Admin', 'Zoo', 30)
-ON CONFLICT (username) DO NOTHING;
-
-INSERT INTO user_role_assignments (username, role_type)
-VALUES ('admin', 'admin')
-ON CONFLICT (username, role_type) DO NOTHING;
-
--- Seed contact info
-INSERT INTO contact_info (type, value) VALUES
-  ('Address', '123 Zoo Avenue, Arcadia'),
-  ('Phone', '+33 1 23 45 67 89'),
-  ('Email', 'contact@zoo-arcadia.fr'),
-  ('Hours', 'Monday - Sunday: 9:00 AM - 6:00 PM')
-ON CONFLICT (type) DO NOTHING;
-
--- Seed habitats
-INSERT INTO habitats (name) VALUES ('Savanna'), ('Jungle'), ('Arctic')
-ON CONFLICT DO NOTHING;
-
--- Seed sample services
-INSERT INTO services (name, description, price, availability_schedule) VALUES
-  ('Guided Safari Tour', 'Explore the savanna with our expert guides', 25.00, 'Daily 10:00 - 16:00'),
-  ('Night Safari', 'Experience the zoo after dark', 35.00, 'Fri-Sat 20:00 - 23:00'),
-  ('Animal Encounter', 'Get up close with select animals', 15.00, 'Daily 11:00 - 15:00')
-ON CONFLICT DO NOTHING;
+-- Seed data is in seed-data.sql — run that file after this schema.

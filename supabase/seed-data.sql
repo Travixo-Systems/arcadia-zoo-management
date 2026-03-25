@@ -1,294 +1,438 @@
--- Arcadia Zoo V2 - Rich Seed Data
--- Run this AFTER schema.sql in your Supabase SQL Editor
+-- =========================================================
+-- ARCADIA ZOO MANAGEMENT V2
+-- EXPANDED SEED DATA PACK
+-- Run AFTER schema.sql in Supabase SQL Editor
+-- =========================================================
+-- All unique constraints (habitats.name, services.name,
+-- animals(prenom,species), contact_info.type) are defined
+-- in schema.sql so ON CONFLICT works correctly here.
 
--- ============================================
--- HABITATS (update with images)
--- ============================================
-UPDATE habitats SET image_url = 'https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?w=800&q=80' WHERE name = 'Savanna';
-UPDATE habitats SET image_url = 'https://images.unsplash.com/photo-1440342359743-84fcb8c21f21?w=800&q=80' WHERE name = 'Jungle';
-UPDATE habitats SET image_url = 'https://images.unsplash.com/photo-1462275646964-a0e3c11f18a6?w=800&q=80' WHERE name = 'Arctic';
+-- ---------------------------------------------------------
+-- USERS
+-- password hash = bcrypt of 'admin123' (demo accounts only)
+-- ---------------------------------------------------------
+INSERT INTO users (username, password, name, lastname, age) VALUES
+  ('admin', '$2a$10$rQEY7gBFpHJnEqJ.6fZGxOuJiYkB2xwLfG2k5q8XqO.uVpQV5dPi', 'Admin', 'Zoo', 30),
+  ('vet_marie', '$2a$10$rQEY7gBFpHJnEqJ.6fZGxOuJiYkB2xwLfG2k5q8XqO.uVpQV5dPi', 'Marie', 'Lefevre', 41),
+  ('vet_thomas', '$2a$10$rQEY7gBFpHJnEqJ.6fZGxOuJiYkB2xwLfG2k5q8XqO.uVpQV5dPi', 'Thomas', 'Girard', 38),
+  ('emp_luc', '$2a$10$rQEY7gBFpHJnEqJ.6fZGxOuJiYkB2xwLfG2k5q8XqO.uVpQV5dPi', 'Luc', 'Moreau', 29),
+  ('emp_sarah', '$2a$10$rQEY7gBFpHJnEqJ.6fZGxOuJiYkB2xwLfG2k5q8XqO.uVpQV5dPi', 'Sarah', 'Petit', 33),
+  ('emp_nina', '$2a$10$rQEY7gBFpHJnEqJ.6fZGxOuJiYkB2xwLfG2k5q8XqO.uVpQV5dPi', 'Nina', 'Bernard', 27),
+  ('emp_hugo', '$2a$10$rQEY7gBFpHJnEqJ.6fZGxOuJiYkB2xwLfG2k5q8XqO.uVpQV5dPi', 'Hugo', 'Roux', 31),
+  ('emp_lea', '$2a$10$rQEY7gBFpHJnEqJ.6fZGxOuJiYkB2xwLfG2k5q8XqO.uVpQV5dPi', 'Lea', 'Fontaine', 26)
+ON CONFLICT (username) DO NOTHING;
 
--- ============================================
--- SAVANNA ANIMALS (habitat_id = 1)
--- ============================================
-INSERT INTO animals (prenom, race, habitat_id, diet, description, characteristics, image_url, species, lifespan, size_weight, gestation, natural_habitat, native_region, lifestyle, distinctive_features)
+INSERT INTO user_role_assignments (username, role_type) VALUES
+  ('admin', 'admin'),
+  ('vet_marie', 'vet'),
+  ('vet_thomas', 'vet'),
+  ('emp_luc', 'emp'),
+  ('emp_sarah', 'emp'),
+  ('emp_nina', 'emp'),
+  ('emp_hugo', 'emp'),
+  ('emp_lea', 'emp')
+ON CONFLICT (username, role_type) DO NOTHING;
+
+-- ---------------------------------------------------------
+-- CONTACT INFO
+-- ---------------------------------------------------------
+INSERT INTO contact_info (type, value) VALUES
+  ('Address', '123 Zoo Avenue, Arcadia'),
+  ('Phone', '+33 1 23 45 67 89'),
+  ('Email', 'contact@zoo-arcadia.fr'),
+  ('Hours', 'Monday - Sunday: 9:00 AM - 6:00 PM'),
+  ('Emergency', '+33 1 98 76 54 32'),
+  ('Instagram', '@zoo_arcadia'),
+  ('Facebook', 'Zoo Arcadia Official'),
+  ('Parking', 'Free visitor parking available every day'),
+  ('Accessibility', 'Wheelchair accessible paths and services')
+ON CONFLICT (type) DO NOTHING;
+
+-- ---------------------------------------------------------
+-- HABITATS
+-- ---------------------------------------------------------
+INSERT INTO habitats (name, image_url) VALUES
+  ('Savanna', '/images/habitats/savanna.jpg'),
+  ('Jungle', '/images/habitats/jungle.jpg'),
+  ('Arctic', '/images/habitats/arctic.jpg'),
+  ('Desert', '/images/habitats/desert.jpg'),
+  ('Wetlands', '/images/habitats/wetlands.jpg'),
+  ('Mountain', '/images/habitats/mountain.jpg'),
+  ('Tropical Aviary', '/images/habitats/tropical-aviary.jpg'),
+  ('Reptile House', '/images/habitats/reptile-house.jpg'),
+  ('Aquatic Zone', '/images/habitats/aquatic-zone.jpg'),
+  ('Rainforest Dome', '/images/habitats/rainforest-dome.jpg')
+ON CONFLICT (name) DO NOTHING;
+
+-- ---------------------------------------------------------
+-- SERVICES
+-- ---------------------------------------------------------
+INSERT INTO services (name, description, price, availability_schedule, image_url) VALUES
+  ('Guided Safari Tour', 'Explore the savanna with our expert guides.', 25.00, 'Daily 10:00 - 16:00', '/images/services/guided-safari.jpg'),
+  ('Night Safari', 'Experience the zoo after dark with a guided group.', 35.00, 'Friday-Saturday 20:00 - 23:00', '/images/services/night-safari.jpg'),
+  ('Animal Encounter', 'Meet selected animals with a trained keeper.', 15.00, 'Daily 11:00 - 15:00', '/images/services/animal-encounter.jpg'),
+  ('Junior Zookeeper Workshop', 'Hands-on educational workshop for children.', 18.00, 'Wednesday-Sunday 14:00', '/images/services/junior-zookeeper.jpg'),
+  ('Bird Feeding Experience', 'Participate in a supervised aviary feeding session.', 12.00, 'Daily 10:30 - 12:30', '/images/services/bird-feeding.jpg'),
+  ('Reptile Discovery Tour', 'Guided visit through the reptile house.', 20.00, 'Tuesday-Sunday 13:00 - 16:00', '/images/services/reptile-tour.jpg'),
+  ('VIP Behind the Scenes', 'Exclusive access to animal care and staff zones.', 60.00, 'Saturday 09:00 - 11:00', '/images/services/vip-backstage.jpg'),
+  ('Family Explorer Pass', 'Bundled family activity package for 4 visitors.', 75.00, 'Daily', '/images/services/family-pass.jpg'),
+  ('Photography Morning', 'Early-entry pass for wildlife photography lovers.', 40.00, 'Sunday 08:00 - 10:00', '/images/services/photography-morning.jpg'),
+  ('School Education Visit', 'Educational group visit with guided sessions.', 10.00, 'Weekdays by reservation', '/images/services/school-visit.jpg')
+ON CONFLICT (name) DO NOTHING;
+
+-- ---------------------------------------------------------
+-- VISITORS
+-- ---------------------------------------------------------
+INSERT INTO visitors (username, name, lastname) VALUES
+  ('alice.m', 'Alice', 'Martin'),
+  ('kevin.d', 'Kevin', 'Dubois'),
+  ('sophie.r', 'Sophie', 'Robert'),
+  ('amina.k', 'Amina', 'Kamara'),
+  ('lucas.b', 'Lucas', 'Boyer'),
+  ('emma.t', 'Emma', 'Thomas'),
+  ('nora.a', 'Nora', 'Aubry'),
+  ('yanis.l', 'Yanis', 'Lemoine'),
+  ('claire.p', 'Claire', 'Perrin'),
+  ('adil.s', 'Adil', 'Said'),
+  ('ines.v', 'Ines', 'Vidal'),
+  ('paul.g', 'Paul', 'Garcia')
+ON CONFLICT (username) DO NOTHING;
+
+-- ---------------------------------------------------------
+-- ANIMALS (20 across 10 habitats)
+-- ---------------------------------------------------------
+INSERT INTO animals (
+  prenom, race, habitat_id, diet, description, characteristics, image_url,
+  species, lifespan, size_weight, gestation, natural_habitat, native_region,
+  lifestyle, distinctive_features
+)
 VALUES
-(
-  'Simba',
-  'Mammalia, Carnivora, Felidae',
-  (SELECT id FROM habitats WHERE name = 'Savanna'),
-  'Carnivore',
-  'Simba is our majestic male lion and the undisputed king of the Savanna enclosure. With his impressive golden mane and powerful build, he commands attention from every visitor.',
-  'Powerful build, golden mane, retractable claws, excellent night vision',
-  'https://images.unsplash.com/photo-1546182990-dffeafbe841d?w=800&q=80',
-  'Panthera leo',
-  '10-14 years in the wild, up to 20 in captivity',
-  'Height: 1.2m at shoulder | Weight: 190 kg',
-  '110 days',
-  'Grasslands, savannas, and open woodlands',
-  'Sub-Saharan Africa',
-  'Lions are the only truly social cats, living in groups called prides. Simba spends his mornings patrolling his territory and afternoons resting in the shade. He is most active during feeding times and at dusk.',
-  'His dark, full mane indicates excellent health and dominance. Simba has a distinctive scar above his left eye from a playful encounter as a cub.'
-),
-(
-  'Nala',
-  'Mammalia, Carnivora, Felidae',
-  (SELECT id FROM habitats WHERE name = 'Savanna'),
-  'Carnivore',
-  'Nala is our graceful lioness and the real hunter of the pride. She is fast, agile, and fiercely protective of her territory.',
-  'Sleek build, tawny coat, exceptional speed and agility',
-  'https://images.unsplash.com/photo-1614027164847-1b28cfe1df60?w=800&q=80',
-  'Panthera leo',
-  '10-14 years in the wild, up to 20 in captivity',
-  'Height: 1.1m at shoulder | Weight: 130 kg',
-  '110 days',
-  'Grasslands, savannas, and open woodlands',
-  'Sub-Saharan Africa',
-  'Nala is the primary hunter and often leads coordinated hunts during enrichment activities. She is social and curious, frequently approaching the viewing glass to observe visitors.',
-  'Nala has unusually bright amber eyes and a calm, observant demeanor that distinguishes her from other lionesses.'
-),
-(
-  'Tembo',
-  'Mammalia, Proboscidea, Elephantidae',
-  (SELECT id FROM habitats WHERE name = 'Savanna'),
-  'Herbivore',
-  'Tembo is our gentle giant African elephant. At over 3 meters tall, he is the largest animal in the zoo and a favorite among families.',
-  'Enormous size, long trunk, large ears, thick grey skin, tusks',
-  'https://images.unsplash.com/photo-1557050543-4d5f4e07ef46?w=800&q=80',
-  'Loxodonta africana',
-  '60-70 years',
-  'Height: 3.3m at shoulder | Weight: 6,000 kg',
-  '22 months',
-  'Savannas, forests, deserts, and marshes',
-  'Sub-Saharan Africa',
-  'Tembo is incredibly intelligent and has learned over 20 commands from his keepers. He loves water and can often be seen spraying himself with his trunk. He consumes about 150 kg of food daily.',
-  'Tembo has distinctively large, fan-shaped ears and a notch on his right ear. He is known for his gentle temperament with keepers and other animals.'
-),
-(
-  'Twiga',
-  'Mammalia, Artiodactyla, Giraffidae',
-  (SELECT id FROM habitats WHERE name = 'Savanna'),
-  'Herbivore',
-  'Twiga is our tallest resident, a beautiful Masai giraffe with unique spot patterns. She gracefully towers over all other animals in the Savanna.',
-  'Extremely tall, long neck, distinctive spot pattern, long prehensile tongue',
-  'https://images.unsplash.com/photo-1547721064-da6cfb341d50?w=800&q=80',
-  'Giraffa tippelskirchi',
-  '25 years in the wild, up to 30 in captivity',
-  'Height: 5.5m | Weight: 800 kg',
-  '15 months',
-  'Open woodlands and savannas',
-  'East Africa (Kenya, Tanzania)',
-  'Twiga spends most of her day browsing treetops that no other animal can reach. She sleeps only 30 minutes a day in short naps. Her 45 cm tongue helps her strip leaves from thorny acacia branches.',
-  'Each giraffe has a unique spot pattern like a fingerprint. Twiga has a heart-shaped spot cluster on her left flank that makes her instantly recognizable.'
-),
-(
-  'Zuri',
-  'Mammalia, Perissodactyla, Rhinocerotidae',
-  (SELECT id FROM habitats WHERE name = 'Savanna'),
-  'Herbivore',
-  'Zuri is our critically endangered white rhinoceros. She is part of an international breeding program to help save her species from extinction.',
-  'Massive body, two horns, thick armored skin, wide square lip',
-  'https://images.unsplash.com/photo-1598894000396-bc30e0996899?w=800&q=80',
-  'Ceratotherium simum',
-  '40-50 years',
-  'Height: 1.8m at shoulder | Weight: 2,300 kg',
-  '16 months',
-  'Grasslands and savannas',
-  'Southern and Eastern Africa',
-  'Despite her size, Zuri is surprisingly gentle. She enjoys mud baths which protect her skin from sunburn and parasites. She has a symbiotic relationship with oxpecker birds that clean her skin.',
-  'Zuri''s name means "beautiful" in Swahili. Her front horn measures 60 cm, and she has a distinctive fold pattern on her neck that keepers use to identify her.'
-);
+  (
+    'Simba', 'Lion',
+    (SELECT id FROM habitats WHERE name = 'Savanna'),
+    'Carnivore',
+    'Dominant male lion living in the savanna enclosure.',
+    'Strong, social, territorial',
+    '/images/animals/simba.jpg',
+    'Panthera leo', '10-14 years', '190 kg / 1.2 m shoulder height', '110 days',
+    'Grasslands and open savannas', 'Sub-Saharan Africa',
+    'Pride-based social lifestyle',
+    'Large mane and powerful roar'
+  ),
+  (
+    'Nala', 'Lioness',
+    (SELECT id FROM habitats WHERE name = 'Savanna'),
+    'Carnivore',
+    'Alert lioness known for agility and maternal behavior.',
+    'Fast, observant, cooperative hunter',
+    '/images/animals/nala.jpg',
+    'Panthera leo', '10-15 years', '130 kg / 1.1 m shoulder height', '110 days',
+    'Savannas', 'Sub-Saharan Africa',
+    'Social', 'Excellent hunting coordination'
+  ),
+  (
+    'Kibo', 'Elephant',
+    (SELECT id FROM habitats WHERE name = 'Savanna'),
+    'Herbivore',
+    'African elephant often seen near the watering area.',
+    'Intelligent, calm, protective',
+    '/images/animals/kibo.jpg',
+    'Loxodonta africana', '60-70 years', '5000 kg / 3.3 m tall', '22 months',
+    'Savannas and woodlands', 'Africa',
+    'Herd-based', 'Long trunk and large ears'
+  ),
+  (
+    'Zuri', 'Giraffe',
+    (SELECT id FROM habitats WHERE name = 'Savanna'),
+    'Herbivore',
+    'Tall giraffe feeding mainly on high branches.',
+    'Gentle, tall, attentive',
+    '/images/animals/zuri.jpg',
+    'Giraffa camelopardalis', '20-25 years', '800 kg / 5.2 m tall', '15 months',
+    'Open woodlands and savannas', 'Africa',
+    'Loose social groups', 'Long neck and patterned coat'
+  ),
+  (
+    'Milo', 'Zebra',
+    (SELECT id FROM habitats WHERE name = 'Savanna'),
+    'Herbivore',
+    'Young zebra that moves actively with the herd.',
+    'Energetic, alert, social',
+    '/images/animals/milo.jpg',
+    'Equus quagga', '20-25 years', '350 kg / 1.4 m tall', '12-13 months',
+    'Savannas and grasslands', 'Eastern and Southern Africa',
+    'Herd-based', 'Distinct black-and-white stripes'
+  ),
+  (
+    'Rafiki', 'Mandrill',
+    (SELECT id FROM habitats WHERE name = 'Jungle'),
+    'Omnivore',
+    'Colorful primate popular with visitors.',
+    'Curious, vocal, dominant',
+    '/images/animals/rafiki.jpg',
+    'Mandrillus sphinx', '20-30 years', '32 kg / 75 cm', '6 months',
+    'Dense tropical forests', 'Central Africa',
+    'Group-living', 'Bright blue and red facial markings'
+  ),
+  (
+    'Luna', 'Jaguar',
+    (SELECT id FROM habitats WHERE name = 'Jungle'),
+    'Carnivore',
+    'Stealthy big cat resting during daytime hours.',
+    'Solitary, stealthy, powerful bite',
+    '/images/animals/luna.jpg',
+    'Panthera onca', '12-15 years', '95 kg / 1.8 m body length', '100 days',
+    'Rainforests and wetlands', 'Central and South America',
+    'Solitary', 'Rosette-patterned coat'
+  ),
+  (
+    'Azul', 'Macaw',
+    (SELECT id FROM habitats WHERE name = 'Tropical Aviary'),
+    'Herbivore',
+    'Blue-and-yellow macaw active in the aviary.',
+    'Loud, intelligent, social',
+    '/images/animals/azul.jpg',
+    'Ara ararauna', '30-50 years', '1.2 kg / 86 cm wingspan', '28 days incubation',
+    'Tropical forests', 'South America',
+    'Pair-bonded social bird', 'Bright blue-yellow plumage'
+  ),
+  (
+    'Kaa', 'Python',
+    (SELECT id FROM habitats WHERE name = 'Reptile House'),
+    'Carnivore',
+    'Large python kept in a climate-controlled terrarium.',
+    'Calm, nocturnal, constrictor',
+    '/images/animals/kaa.jpg',
+    'Python bivittatus', '20-25 years', '70 kg / 4.5 m', 'Egg-laying',
+    'Wetlands and forests', 'Southeast Asia',
+    'Solitary', 'Muscular body and camouflage pattern'
+  ),
+  (
+    'Togo', 'Crocodile',
+    (SELECT id FROM habitats WHERE name = 'Wetlands'),
+    'Carnivore',
+    'Large crocodile occupying the wetland basin.',
+    'Ambush predator, patient, territorial',
+    '/images/animals/togo.jpg',
+    'Crocodylus niloticus', '50-70 years', '500 kg / 4 m', 'Egg-laying',
+    'Rivers and marshes', 'Africa',
+    'Mostly solitary', 'Armored skin and powerful jaws'
+  ),
+  (
+    'Nanuk', 'Polar Bear',
+    (SELECT id FROM habitats WHERE name = 'Arctic'),
+    'Carnivore',
+    'Adult polar bear adapted to cold environments.',
+    'Strong swimmer, powerful, curious',
+    '/images/animals/nanuk.jpg',
+    'Ursus maritimus', '20-25 years', '450 kg / 2.5 m', '8 months including delayed implantation',
+    'Sea ice and arctic coasts', 'Arctic Circle',
+    'Mostly solitary', 'White fur and strong forelimbs'
+  ),
+  (
+    'Freya', 'Arctic Fox',
+    (SELECT id FROM habitats WHERE name = 'Arctic'),
+    'Omnivore',
+    'Small fox with seasonal coat changes.',
+    'Agile, quiet, adaptable',
+    '/images/animals/freya.jpg',
+    'Vulpes lagopus', '10-14 years', '4 kg / 60 cm', '52 days',
+    'Tundra', 'Arctic regions',
+    'Pair and family group lifestyle', 'Dense fur and compact body'
+  ),
+  (
+    'Sirocco', 'Camel',
+    (SELECT id FROM habitats WHERE name = 'Desert'),
+    'Herbivore',
+    'Dromedary camel used in educational presentations.',
+    'Resilient, calm, enduring',
+    '/images/animals/sirocco.jpg',
+    'Camelus dromedarius', '40-50 years', '600 kg / 2 m at hump', '13 months',
+    'Deserts and arid plains', 'North Africa and Middle East',
+    'Group-living', 'Single hump and water conservation adaptation'
+  ),
+  (
+    'Pico', 'Meerkat',
+    (SELECT id FROM habitats WHERE name = 'Desert'),
+    'Omnivore',
+    'Highly active meerkat seen on lookout duty.',
+    'Alert, social, playful',
+    '/images/animals/pico.jpg',
+    'Suricata suricatta', '12-14 years', '1 kg / 35 cm', '11 weeks',
+    'Dry open terrain', 'Southern Africa',
+    'Large social colonies', 'Upright sentinel posture'
+  ),
+  (
+    'Rocky', 'Snow Leopard',
+    (SELECT id FROM habitats WHERE name = 'Mountain'),
+    'Carnivore',
+    'Mountain predator resting on elevated rocks.',
+    'Elusive, agile, solitary',
+    '/images/animals/rocky.jpg',
+    'Panthera uncia', '15-18 years', '40 kg / 1.2 m body length', '90-100 days',
+    'High mountain ranges', 'Central and South Asia',
+    'Solitary', 'Thick tail and spotted coat'
+  ),
+  (
+    'Mira', 'Red Panda',
+    (SELECT id FROM habitats WHERE name = 'Mountain'),
+    'Herbivore',
+    'Tree-loving red panda active during cool hours.',
+    'Shy, climbing specialist, calm',
+    '/images/animals/mira.jpg',
+    'Ailurus fulgens', '8-14 years', '5 kg / 60 cm', '135 days',
+    'Temperate mountain forests', 'Himalayan region',
+    'Mostly solitary', 'Reddish fur and ringed tail'
+  ),
+  (
+    'Orion', 'Otter',
+    (SELECT id FROM habitats WHERE name = 'Aquatic Zone'),
+    'Carnivore',
+    'Playful otter frequently seen swimming in groups.',
+    'Playful, social, agile',
+    '/images/animals/orion.jpg',
+    'Lutra lutra', '10-16 years', '9 kg / 1 m', '60-63 days',
+    'Rivers, lakes and wetlands', 'Europe and Asia',
+    'Small family groups', 'Streamlined body and dense fur'
+  ),
+  (
+    'Bubbles', 'Penguin',
+    (SELECT id FROM habitats WHERE name = 'Aquatic Zone'),
+    'Carnivore',
+    'Penguin thriving in the chilled aquatic enclosure.',
+    'Social, vocal, fast swimmer',
+    '/images/animals/bubbles.jpg',
+    'Spheniscus humboldti', '15-20 years', '4.5 kg / 65 cm', 'Egg-laying',
+    'Coastal marine areas', 'South America',
+    'Colony-based', 'Countershaded plumage'
+  ),
+  (
+    'Tina', 'Toucan',
+    (SELECT id FROM habitats WHERE name = 'Rainforest Dome'),
+    'Omnivore',
+    'Colorful toucan with a very active feeding pattern.',
+    'Curious, lightweight, expressive',
+    '/images/animals/tina.jpg',
+    'Ramphastos toco', '15-20 years', '0.8 kg / 60 cm', 'Egg-laying',
+    'Tropical forests', 'South America',
+    'Small groups', 'Oversized colorful bill'
+  ),
+  (
+    'Diego', 'Tapir',
+    (SELECT id FROM habitats WHERE name = 'Rainforest Dome'),
+    'Herbivore',
+    'Tapir spending most of the day in shaded muddy areas.',
+    'Docile, shy, nocturnal tendency',
+    '/images/animals/diego.jpg',
+    'Tapirus terrestris', '25-30 years', '250 kg / 2 m', '13 months',
+    'Rainforests and wetlands', 'South America',
+    'Mostly solitary', 'Short flexible snout'
+  )
+ON CONFLICT (prenom, species) DO NOTHING;
 
--- ============================================
--- JUNGLE ANIMALS (habitat_id = 2)
--- ============================================
-INSERT INTO animals (prenom, race, habitat_id, diet, description, characteristics, image_url, species, lifespan, size_weight, gestation, natural_habitat, native_region, lifestyle, distinctive_features)
-VALUES
-(
-  'Raja',
-  'Mammalia, Carnivora, Felidae',
-  (SELECT id FROM habitats WHERE name = 'Jungle'),
-  'Carnivore',
-  'Raja is our magnificent Bengal tiger, the crown jewel of the Jungle habitat. His striking orange coat with black stripes makes him one of the most photographed animals at the zoo.',
-  'Powerful muscular build, orange coat with black stripes, white underbelly',
-  'https://images.unsplash.com/photo-1561731216-c3a4d99437d5?w=800&q=80',
-  'Panthera tigris tigris',
-  '10-15 years in the wild, up to 20 in captivity',
-  'Length: 3m (incl. tail) | Weight: 220 kg',
-  '104 days',
-  'Tropical forests, mangrove swamps, and grasslands',
-  'Indian subcontinent',
-  'Raja is a solitary and territorial animal. He patrols his enclosure regularly and is most active at dawn and dusk. He is an excellent swimmer and enjoys lounging in his pool during warm days.',
-  'Raja has an unusually symmetrical stripe pattern and a distinctive "M" marking on his forehead. His stripes are as unique as human fingerprints.'
-),
-(
-  'Koko',
-  'Mammalia, Primates, Hominidae',
-  (SELECT id FROM habitats WHERE name = 'Jungle'),
-  'Omnivore',
-  'Koko is our silverback western lowland gorilla and the leader of our gorilla family. He is incredibly intelligent, gentle with his group, and endlessly fascinating to watch.',
-  'Massive build, silver-grey back, dark face, intelligent eyes',
-  'https://images.unsplash.com/photo-1564349683136-77e08dba1ef7?w=800&q=80',
-  'Gorilla gorilla gorilla',
-  '35-40 years in the wild, up to 50 in captivity',
-  'Height: 1.7m standing | Weight: 180 kg',
-  '8.5 months',
-  'Tropical and subtropical forests',
-  'Central and West Africa',
-  'Koko leads a family group of 6 gorillas. He communicates through over 25 distinct vocalizations and uses tools during enrichment activities. He is protective but gentle, often seen playing with younger gorillas.',
-  'The silver coloring on his back signifies his maturity and leadership status. Koko has a distinctive nose print (unique to each gorilla) and a calm, contemplative gaze.'
-),
-(
-  'Jade',
-  'Reptilia, Squamata, Pythonidae',
-  (SELECT id FROM habitats WHERE name = 'Jungle'),
-  'Carnivore',
-  'Jade is our stunning green tree python. Her vivid emerald color and elegant coiled posture on branches make her a mesmerizing sight in our reptile section.',
-  'Bright green scales, prehensile tail, heat-sensing pits, slender build',
-  'https://images.unsplash.com/photo-1531386151447-fd76ad50012f?w=800&q=80',
-  'Morelia viridis',
-  '15-20 years',
-  'Length: 1.8m | Weight: 1.6 kg',
-  'Egg-laying: 25-30 eggs, 50 day incubation',
-  'Tropical rainforests, canopy layer',
-  'New Guinea, Indonesia, and Cape York (Australia)',
-  'Jade spends almost her entire life in the trees, rarely descending to the ground. She hunts by draping herself over a branch and striking at passing prey with lightning speed. She is most active at night.',
-  'Jade was actually bright red as a juvenile — green tree pythons undergo a dramatic color change as they mature. She has a distinctive row of white scales along her spine.'
-),
-(
-  'Coco',
-  'Aves, Psittaciformes, Cacatuidae',
-  (SELECT id FROM habitats WHERE name = 'Jungle'),
-  'Herbivore',
-  'Coco is our playful and vocal sulphur-crested cockatoo. She greets visitors with head bobs and can mimic several words and sounds, making her one of the most interactive animals in the zoo.',
-  'White plumage, yellow crest, curved beak, highly intelligent',
-  'https://images.unsplash.com/photo-1552728089-57bdde30beb3?w=800&q=80',
-  'Cacatua galerita',
-  '20-40 years in the wild, up to 70 in captivity',
-  'Length: 50 cm | Weight: 900 g',
-  'Egg incubation: 30 days',
-  'Tropical and subtropical forests, woodland edges',
-  'Australia, New Guinea, Indonesia',
-  'Coco is extremely social and thrives on interaction. She can solve simple puzzles, dance to music, and has a vocabulary of about 15 words. She raises her yellow crest when excited or alarmed.',
-  'Coco can raise and lower her bright yellow crest to express emotions. She has an unusually large vocabulary for her species and will say "hello" to visitors who make eye contact.'
-),
-(
-  'Mowgli',
-  'Mammalia, Carnivora, Ursidae',
-  (SELECT id FROM habitats WHERE name = 'Jungle'),
-  'Omnivore',
-  'Mowgli is our Malayan sun bear, the smallest bear species in the world. Despite his small size, he has a huge personality and loves climbing and foraging for honey.',
-  'Small compact body, short black fur, distinctive chest patch, long tongue',
-  'https://images.unsplash.com/photo-1589656966895-2f33e7653571?w=800&q=80',
-  'Helarctos malayanus',
-  '25 years in captivity',
-  'Height: 70 cm at shoulder | Weight: 45 kg',
-  '95 days',
-  'Tropical lowland forests',
-  'Southeast Asia',
-  'Mowgli is an excellent climber and spends much of his time in the canopy platforms of his enclosure. He uses his extraordinarily long tongue (25 cm) to extract honey and insects. He is most active in the morning.',
-  'Mowgli has a unique golden crescent-shaped chest patch — no two sun bears have the same marking. His long curved claws make him one of the best climbers in the bear family.'
-);
+-- ---------------------------------------------------------
+-- REVIEWS
+-- ---------------------------------------------------------
+INSERT INTO reviews (visitor_name, review, rating, review_date, approved) VALUES
+  ('Alice Martin', 'Beautiful zoo, very clean and the staff were helpful.', 5, NOW() - INTERVAL '18 days', TRUE),
+  ('Kevin Dubois', 'The safari tour was excellent and very educational.', 5, NOW() - INTERVAL '16 days', TRUE),
+  ('Sophie Robert', 'Great family experience, especially the giraffes and aviary.', 4, NOW() - INTERVAL '15 days', TRUE),
+  ('Amina Kamara', 'Nice atmosphere, but the snack area was crowded.', 4, NOW() - INTERVAL '14 days', TRUE),
+  ('Lucas Boyer', 'My kids loved the penguins and the keeper talk.', 5, NOW() - INTERVAL '12 days', TRUE),
+  ('Emma Thomas', 'Good experience overall, signage could be clearer.', 4, NOW() - INTERVAL '11 days', TRUE),
+  ('Nora Aubry', 'Very immersive habitats and well-maintained paths.', 5, NOW() - INTERVAL '10 days', TRUE),
+  ('Yanis Lemoine', 'The reptile house was surprisingly one of the best parts.', 5, NOW() - INTERVAL '8 days', TRUE),
+  ('Claire Perrin', 'Friendly staff and easy online booking process.', 4, NOW() - INTERVAL '7 days', TRUE),
+  ('Adil Said', 'The night safari was unique and worth the extra cost.', 5, NOW() - INTERVAL '6 days', TRUE),
+  ('Ines Vidal', 'Loved the educational angle, especially for children.', 5, NOW() - INTERVAL '5 days', TRUE),
+  ('Paul Garcia', 'Great visit but parking filled up quickly around noon.', 4, NOW() - INTERVAL '3 days', FALSE);
 
--- ============================================
--- ARCTIC ANIMALS (habitat_id = 3)
--- ============================================
-INSERT INTO animals (prenom, race, habitat_id, diet, description, characteristics, image_url, species, lifespan, size_weight, gestation, natural_habitat, native_region, lifestyle, distinctive_features)
-VALUES
-(
-  'Aurora',
-  'Mammalia, Carnivora, Ursidae',
-  (SELECT id FROM habitats WHERE name = 'Arctic'),
-  'Carnivore',
-  'Aurora is our magnificent polar bear and the star of the Arctic habitat. Named after the Northern Lights, she is powerful, playful, and endlessly entertaining as she dives and swims in her pool.',
-  'Massive white-furred body, powerful limbs, large paws, black nose',
-  'https://images.unsplash.com/photo-1589656966895-2f33e7653571?w=800&q=80',
-  'Ursus maritimus',
-  '25-30 years',
-  'Height: 1.6m at shoulder | Weight: 350 kg',
-  '8 months (including delayed implantation)',
-  'Sea ice, coastal areas, and Arctic tundra',
-  'Arctic Circle (Canada, Russia, Norway, Greenland, Alaska)',
-  'Aurora is a powerful swimmer and can often be seen diving for enrichment toys in her deep pool. She is most active in cooler weather and has a playful habit of sliding on ice blocks her keepers provide.',
-  'Aurora has a distinctively cream-colored coat (polar bear fur is actually transparent, not white). She has a small notch in her left ear and an incredibly gentle temperament during training sessions.'
-),
-(
-  'Tux',
-  'Aves, Sphenisciformes, Spheniscidae',
-  (SELECT id FROM habitats WHERE name = 'Arctic'),
-  'Carnivore (Fish)',
-  'Tux is the boldest of our emperor penguin colony. He waddles right up to the viewing glass and seems genuinely curious about the humans watching him. A visitor favorite!',
-  'Tall upright posture, black and white plumage, yellow-orange ear patches',
-  'https://images.unsplash.com/photo-1551986782-d0169b3f8fa7?w=800&q=80',
-  'Aptenodytes forsteri',
-  '15-20 years in the wild, up to 30 in captivity',
-  'Height: 1.1m | Weight: 35 kg',
-  'Egg incubation: 65 days (by the male)',
-  'Antarctic sea ice and surrounding cold waters',
-  'Antarctica',
-  'Tux lives with a colony of 12 penguins. He is an incredible swimmer, reaching speeds of 9 km/h underwater. He participates in daily feeding shows where visitors can watch him catch fish mid-dive.',
-  'Tux has exceptionally bright orange ear patches compared to others in the colony. He is the first penguin to approach keepers at feeding time and has a distinctive upright waddle.'
-),
-(
-  'Frost',
-  'Mammalia, Carnivora, Canidae',
-  (SELECT id FROM habitats WHERE name = 'Arctic'),
-  'Omnivore',
-  'Frost is our beautiful Arctic fox, sporting a thick white winter coat that turns grey-brown in summer. She is quick, clever, and incredibly well-adapted to cold environments.',
-  'Small compact body, thick white fur, bushy tail, short rounded ears',
-  'https://images.unsplash.com/photo-1516728778615-2d590ea1855e?w=800&q=80',
-  'Vulpes lagopus',
-  '3-6 years in the wild, up to 14 in captivity',
-  'Length: 55 cm (body) | Weight: 3.5 kg',
-  '52 days',
-  'Arctic tundra and coastal areas',
-  'Circumpolar Arctic regions',
-  'Frost is incredibly agile and playful. She loves to pounce on hidden food items in the snow — a hunting technique called "mousing." Her thick fur keeps her warm even at -50C, and she changes coat color with the seasons.',
-  'Frost''s fur changes from pure white in winter to brown-grey in summer — one of the most dramatic seasonal transformations in the animal kingdom. She has unusually bright blue eyes.'
-),
-(
-  'Nanook',
-  'Mammalia, Carnivora, Phocidae',
-  (SELECT id FROM habitats WHERE name = 'Arctic'),
-  'Carnivore (Fish)',
-  'Nanook is our playful harp seal. With his spotted silver coat and enormous dark eyes, he charms every visitor. He loves performing barrel rolls in the water during feeding time.',
-  'Streamlined body, silver-grey spotted coat, large dark eyes, whiskers',
-  'https://images.unsplash.com/photo-1580993741002-0522e7470ef2?w=800&q=80',
-  'Pagophilus groenlandicus',
-  '20-30 years',
-  'Length: 1.7m | Weight: 130 kg',
-  '11.5 months (including delayed implantation)',
-  'North Atlantic and Arctic Ocean sea ice',
-  'North Atlantic and Arctic regions',
-  'Nanook is an expert swimmer who can hold his breath for up to 20 minutes and dive to 300 meters. He is very social and vocal, producing a variety of calls. He is trained for voluntary health checks.',
-  'Nanook has a distinctive horseshoe-shaped marking on his back typical of adult harp seals. His large dark eyes are adapted for seeing underwater in low light conditions.'
-),
-(
-  'Blizzard',
-  'Mammalia, Artiodactyla, Bovidae',
-  (SELECT id FROM habitats WHERE name = 'Arctic'),
-  'Herbivore',
-  'Blizzard is our imposing musk ox, built like a tank with a thick woolly coat that hangs nearly to the ground. He looks like he walked straight out of the Ice Age.',
-  'Stocky build, long shaggy coat, curved horns, shoulder hump',
-  'https://images.unsplash.com/photo-1606567595334-d39972c85dbe?w=800&q=80',
-  'Ovibos moschatus',
-  '12-20 years',
-  'Height: 1.5m at shoulder | Weight: 400 kg',
-  '8 months',
-  'Arctic tundra and frozen landscapes',
-  'Greenland, Arctic Canada, Alaska, Siberia',
-  'Blizzard is a herd animal and lives with two other musk oxen. When threatened, they form a defensive circle — a behavior dating back to the Ice Age. His underwool (qiviut) is 8 times warmer than sheep wool.',
-  'Blizzard''s curved horns form a distinctive "boss" across his forehead. His outer guard hairs reach nearly to the ground, giving him a prehistoric appearance that fascinates visitors.'
-);
+-- ---------------------------------------------------------
+-- BOOKINGS
+-- ---------------------------------------------------------
+INSERT INTO bookings (visitor_username, service_id, booking_date, status) VALUES
+  ('alice.m', (SELECT id FROM services WHERE name = 'Guided Safari Tour'), CURRENT_DATE + 2, 'Confirmed'),
+  ('kevin.d', (SELECT id FROM services WHERE name = 'Night Safari'), CURRENT_DATE + 4, 'Pending'),
+  ('sophie.r', (SELECT id FROM services WHERE name = 'Animal Encounter'), CURRENT_DATE + 1, 'Confirmed'),
+  ('amina.k', (SELECT id FROM services WHERE name = 'Junior Zookeeper Workshop'), CURRENT_DATE + 3, 'Confirmed'),
+  ('lucas.b', (SELECT id FROM services WHERE name = 'Family Explorer Pass'), CURRENT_DATE + 5, 'Pending'),
+  ('emma.t', (SELECT id FROM services WHERE name = 'Photography Morning'), CURRENT_DATE + 6, 'Confirmed'),
+  ('nora.a', (SELECT id FROM services WHERE name = 'Bird Feeding Experience'), CURRENT_DATE + 2, 'Confirmed'),
+  ('yanis.l', (SELECT id FROM services WHERE name = 'Reptile Discovery Tour'), CURRENT_DATE + 3, 'Pending'),
+  ('claire.p', (SELECT id FROM services WHERE name = 'VIP Behind the Scenes'), CURRENT_DATE + 7, 'Confirmed'),
+  ('adil.s', (SELECT id FROM services WHERE name = 'Guided Safari Tour'), CURRENT_DATE + 1, 'Confirmed'),
+  ('ines.v', (SELECT id FROM services WHERE name = 'School Education Visit'), CURRENT_DATE + 9, 'Pending'),
+  ('paul.g', (SELECT id FROM services WHERE name = 'Night Safari'), CURRENT_DATE + 10, 'Cancelled');
 
--- ============================================
--- VISITOR REVIEWS (pre-approved)
--- ============================================
-INSERT INTO reviews (visitor_name, review, rating, review_date, approved)
-VALUES
-  ('Marie Dupont', 'Absolutely wonderful experience! The Savanna habitat was breathtaking and seeing Tembo the elephant up close was unforgettable. The kids loved every minute.', 5, NOW() - INTERVAL '2 days', true),
-  ('Jean-Pierre Martin', 'Great zoo with well-maintained habitats. Raja the tiger was magnificent. Only wish there were more food options near the Arctic exhibit.', 4, NOW() - INTERVAL '5 days', true),
-  ('Sophie Laurent', 'We visited on a rainy day and it was still amazing! The penguin feeding show with Tux was the highlight. Staff were friendly and knowledgeable.', 5, NOW() - INTERVAL '8 days', true),
-  ('Thomas Bernard', 'Beautiful zoo with a real focus on conservation. Loved learning about Zuri the rhino and the breeding program. Very educational for children.', 5, NOW() - INTERVAL '12 days', true),
-  ('Claire Moreau', 'Spent the whole day here and did not get bored. The jungle section with Koko the gorilla was incredible. Highly recommend the guided safari tour!', 5, NOW() - INTERVAL '15 days', true),
-  ('Lucas Petit', 'Nice zoo, good variety of animals. The Arctic section was really well done. Frost the Arctic fox was adorable! Would definitely come back.', 4, NOW() - INTERVAL '20 days', true);
+-- ---------------------------------------------------------
+-- CONTACT SUBMISSIONS
+-- ---------------------------------------------------------
+INSERT INTO contact_submissions (name, email, phone, subject, message, created_at) VALUES
+  ('Laura Benoit', 'laura.benoit@example.com', '+33 6 11 22 33 44', 'School visit inquiry', 'We would like to organize a school group visit for 28 students next month.', NOW() - INTERVAL '12 days'),
+  ('Mathieu Caron', 'mathieu.caron@example.com', '+33 6 22 33 44 55', 'Lost item', 'My daughter may have left a blue backpack near the aviary.', NOW() - INTERVAL '9 days'),
+  ('Sana El Idrissi', 'sana.elidrissi@example.com', '+33 6 33 44 55 66', 'Accessibility question', 'Can wheelchairs be rented on site?', NOW() - INTERVAL '8 days'),
+  ('Romain Dufour', 'romain.dufour@example.com', '+33 6 44 55 66 77', 'Birthday event', 'Do you offer birthday packages for children?', NOW() - INTERVAL '7 days'),
+  ('Helene Marchal', 'helene.marchal@example.com', NULL, 'Opening hours', 'Are you open on public holidays?', NOW() - INTERVAL '5 days'),
+  ('Idriss Konate', 'idriss.konate@example.com', '+33 6 55 66 77 88', 'Partnership request', 'We are interested in a local tourism partnership.', NOW() - INTERVAL '3 days');
+
+-- ---------------------------------------------------------
+-- VETERINARY REPORTS
+-- ---------------------------------------------------------
+INSERT INTO veterinary_reports (
+  animal_id, vet_username, report_date, health_status,
+  treatment, weight_at_checkup, follow_up_date, habitat_comments
+) VALUES
+  ((SELECT id FROM animals WHERE prenom = 'Simba' AND species = 'Panthera leo'), 'vet_marie', CURRENT_DATE - 20, 'Stable', 'Routine examination completed. No treatment needed.', 191.50, CURRENT_DATE + 90, 'Habitat fencing and shaded area in good condition.'),
+  ((SELECT id FROM animals WHERE prenom = 'Nala' AND species = 'Panthera leo'), 'vet_marie', CURRENT_DATE - 18, 'Stable', 'Mild paw irritation cleaned and monitored.', 132.20, CURRENT_DATE + 30, 'Ground substrate should remain dry near feeding zone.'),
+  ((SELECT id FROM animals WHERE prenom = 'Kibo' AND species = 'Loxodonta africana'), 'vet_thomas', CURRENT_DATE - 16, 'Good', 'Foot pad inspection completed. Moisturizing care applied.', 5025.00, CURRENT_DATE + 45, 'Mud area and water access adequate.'),
+  ((SELECT id FROM animals WHERE prenom = 'Zuri' AND species = 'Giraffa camelopardalis'), 'vet_thomas', CURRENT_DATE - 15, 'Stable', 'Routine checkup completed successfully.', 805.60, CURRENT_DATE + 60, 'Feeding platform height remains appropriate.'),
+  ((SELECT id FROM animals WHERE prenom = 'Luna' AND species = 'Panthera onca'), 'vet_marie', CURRENT_DATE - 13, 'Under observation', 'Reduced appetite monitored. Enrichment adjusted.', 94.10, CURRENT_DATE + 14, 'Quiet zone should be maintained during peak visitor hours.'),
+  ((SELECT id FROM animals WHERE prenom = 'Kaa' AND species = 'Python bivittatus'), 'vet_thomas', CURRENT_DATE - 11, 'Good', 'Humidity-related shedding check completed.', 71.30, CURRENT_DATE + 40, 'Humidity and heat levels should be closely monitored.'),
+  ((SELECT id FROM animals WHERE prenom = 'Nanuk' AND species = 'Ursus maritimus'), 'vet_marie', CURRENT_DATE - 10, 'Stable', 'Routine dental inspection completed.', 448.00, CURRENT_DATE + 75, 'Pool cooling system functioning correctly.'),
+  ((SELECT id FROM animals WHERE prenom = 'Rocky' AND species = 'Panthera uncia'), 'vet_thomas', CURRENT_DATE - 8, 'Good', 'Minor muscle stiffness after activity. Anti-inflammatory course prescribed.', 41.20, CURRENT_DATE + 21, 'Rock climbing structures remain safe and dry.'),
+  ((SELECT id FROM animals WHERE prenom = 'Orion' AND species = 'Lutra lutra'), 'vet_marie', CURRENT_DATE - 6, 'Stable', 'Routine exam completed. Excellent coat condition.', 9.40, CURRENT_DATE + 60, 'Water filtration quality is good.'),
+  ((SELECT id FROM animals WHERE prenom = 'Diego' AND species = 'Tapirus terrestris'), 'vet_thomas', CURRENT_DATE - 4, 'Good', 'Skin inspection completed. No abnormal findings.', 248.70, CURRENT_DATE + 90, 'Mud bath area should remain available daily.');
+
+-- ---------------------------------------------------------
+-- FEEDING RECORDS
+-- ---------------------------------------------------------
+INSERT INTO feeding_records (animal_id, meal_preparation, weight, feeding_time) VALUES
+  ((SELECT id FROM animals WHERE prenom = 'Simba' AND species = 'Panthera leo'), '4 kg beef with supplements', 4.00, NOW() - INTERVAL '10 hours'),
+  ((SELECT id FROM animals WHERE prenom = 'Nala' AND species = 'Panthera leo'), '3.5 kg poultry and vitamins', 3.50, NOW() - INTERVAL '9 hours'),
+  ((SELECT id FROM animals WHERE prenom = 'Kibo' AND species = 'Loxodonta africana'), 'Hay, apples, carrots, leafy greens', 65.00, NOW() - INTERVAL '8 hours'),
+  ((SELECT id FROM animals WHERE prenom = 'Zuri' AND species = 'Giraffa camelopardalis'), 'Acacia branches and pellet mix', 18.00, NOW() - INTERVAL '7 hours'),
+  ((SELECT id FROM animals WHERE prenom = 'Milo' AND species = 'Equus quagga'), 'Grass hay and mineral supplement', 12.00, NOW() - INTERVAL '7 hours'),
+  ((SELECT id FROM animals WHERE prenom = 'Rafiki' AND species = 'Mandrillus sphinx'), 'Fruit bowl, seeds, insects', 3.20, NOW() - INTERVAL '6 hours'),
+  ((SELECT id FROM animals WHERE prenom = 'Luna' AND species = 'Panthera onca'), '3 kg rabbit meat', 3.00, NOW() - INTERVAL '6 hours'),
+  ((SELECT id FROM animals WHERE prenom = 'Azul' AND species = 'Ara ararauna'), 'Tropical fruit mix and nuts', 0.45, NOW() - INTERVAL '5 hours'),
+  ((SELECT id FROM animals WHERE prenom = 'Kaa' AND species = 'Python bivittatus'), 'Whole prey feeding', 2.80, NOW() - INTERVAL '4 days'),
+  ((SELECT id FROM animals WHERE prenom = 'Togo' AND species = 'Crocodylus niloticus'), 'Fish and poultry portions', 6.50, NOW() - INTERVAL '12 hours'),
+  ((SELECT id FROM animals WHERE prenom = 'Nanuk' AND species = 'Ursus maritimus'), 'Fish, seal-fat substitute, enrichment ice blocks', 14.00, NOW() - INTERVAL '11 hours'),
+  ((SELECT id FROM animals WHERE prenom = 'Freya' AND species = 'Vulpes lagopus'), 'Mixed protein and berries', 0.90, NOW() - INTERVAL '10 hours'),
+  ((SELECT id FROM animals WHERE prenom = 'Sirocco' AND species = 'Camelus dromedarius'), 'Dry forage and vegetables', 20.00, NOW() - INTERVAL '9 hours'),
+  ((SELECT id FROM animals WHERE prenom = 'Pico' AND species = 'Suricata suricatta'), 'Insects, eggs and chopped vegetables', 0.35, NOW() - INTERVAL '8 hours'),
+  ((SELECT id FROM animals WHERE prenom = 'Rocky' AND species = 'Panthera uncia'), '2.5 kg meat ration', 2.50, NOW() - INTERVAL '7 hours'),
+  ((SELECT id FROM animals WHERE prenom = 'Mira' AND species = 'Ailurus fulgens'), 'Bamboo, fruit and biscuits', 1.10, NOW() - INTERVAL '6 hours'),
+  ((SELECT id FROM animals WHERE prenom = 'Orion' AND species = 'Lutra lutra'), 'Fish and shellfish mix', 1.80, NOW() - INTERVAL '5 hours'),
+  ((SELECT id FROM animals WHERE prenom = 'Bubbles' AND species = 'Spheniscus humboldti'), 'Sardines and capelin', 1.20, NOW() - INTERVAL '5 hours'),
+  ((SELECT id FROM animals WHERE prenom = 'Tina' AND species = 'Ramphastos toco'), 'Fruit slices and insects', 0.40, NOW() - INTERVAL '4 hours'),
+  ((SELECT id FROM animals WHERE prenom = 'Diego' AND species = 'Tapirus terrestris'), 'Leafy greens, fruit and root vegetables', 11.00, NOW() - INTERVAL '4 hours');
+
+-- ---------------------------------------------------------
+-- ANIMAL CLICKS (analytics)
+-- ---------------------------------------------------------
+INSERT INTO animal_clicks (animal_id, click_count, animal_name, first_click, last_click) VALUES
+  ((SELECT id FROM animals WHERE prenom = 'Simba' AND species = 'Panthera leo'), 128, 'Simba', NOW() - INTERVAL '60 days', NOW() - INTERVAL '2 hours'),
+  ((SELECT id FROM animals WHERE prenom = 'Nala' AND species = 'Panthera leo'), 93, 'Nala', NOW() - INTERVAL '58 days', NOW() - INTERVAL '5 hours'),
+  ((SELECT id FROM animals WHERE prenom = 'Kibo' AND species = 'Loxodonta africana'), 115, 'Kibo', NOW() - INTERVAL '57 days', NOW() - INTERVAL '1 day'),
+  ((SELECT id FROM animals WHERE prenom = 'Zuri' AND species = 'Giraffa camelopardalis'), 110, 'Zuri', NOW() - INTERVAL '55 days', NOW() - INTERVAL '9 hours'),
+  ((SELECT id FROM animals WHERE prenom = 'Luna' AND species = 'Panthera onca'), 87, 'Luna', NOW() - INTERVAL '54 days', NOW() - INTERVAL '6 hours'),
+  ((SELECT id FROM animals WHERE prenom = 'Azul' AND species = 'Ara ararauna'), 76, 'Azul', NOW() - INTERVAL '52 days', NOW() - INTERVAL '7 hours'),
+  ((SELECT id FROM animals WHERE prenom = 'Nanuk' AND species = 'Ursus maritimus'), 132, 'Nanuk', NOW() - INTERVAL '50 days', NOW() - INTERVAL '3 hours'),
+  ((SELECT id FROM animals WHERE prenom = 'Rocky' AND species = 'Panthera uncia'), 84, 'Rocky', NOW() - INTERVAL '48 days', NOW() - INTERVAL '11 hours'),
+  ((SELECT id FROM animals WHERE prenom = 'Orion' AND species = 'Lutra lutra'), 69, 'Orion', NOW() - INTERVAL '47 days', NOW() - INTERVAL '13 hours'),
+  ((SELECT id FROM animals WHERE prenom = 'Bubbles' AND species = 'Spheniscus humboldti'), 97, 'Bubbles', NOW() - INTERVAL '45 days', NOW() - INTERVAL '8 hours')
+ON CONFLICT (animal_id) DO UPDATE SET
+  click_count = EXCLUDED.click_count,
+  animal_name = EXCLUDED.animal_name,
+  last_click = EXCLUDED.last_click;
