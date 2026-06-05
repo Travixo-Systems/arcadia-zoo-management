@@ -1,12 +1,18 @@
 "use client";
 
+import Link from "next/link";
+
 export default function ClickTracker({
   animalId,
   animalName,
+  href,
+  className,
   children,
 }: {
   animalId: number;
   animalName: string;
+  href: string;
+  className?: string;
   children: React.ReactNode;
 }) {
   function handleClick() {
@@ -17,5 +23,9 @@ export default function ClickTracker({
     }).catch(() => {});
   }
 
-  return <div onClick={handleClick}>{children}</div>;
+  return (
+    <Link href={href} onClick={handleClick} className={className}>
+      {children}
+    </Link>
+  );
 }

@@ -1,8 +1,17 @@
-import Link from "next/link";
 import { createClient } from "@/lib/supabase-server";
 import ClickTracker from "./ClickTracker";
 
 export const dynamic = "force-dynamic";
+
+// Per-animal thumbnail focal point so the head stays in frame when the card
+// crops the image. Falls back to DEFAULT_FOCUS for everything else.
+const DEFAULT_FOCUS = "center 30%";
+const IMAGE_FOCUS: Record<string, string> = {
+  Zazu: "top",     // ground hornbill — head sits high
+  Kondo: "top",    // gorilla — keep the face
+  Blizzard: "top", // arctic fox — face near top
+  Frost: "top",    // penguin — head near top
+};
 
 export default async function AnimalsPage() {
   const supabase = await createClient();
@@ -39,32 +48,37 @@ export default async function AnimalsPage() {
           )}
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
             {data.animals?.map((animal) => (
-              <div key={animal.id} className="bg-white rounded shadow overflow-hidden border border-gray-200">
+              <ClickTracker
+                key={animal.id}
+                animalId={animal.id}
+                animalName={animal.prenom}
+                href={`/animals/${animal.id}`}
+                className="group flex flex-col bg-white rounded-lg shadow-sm overflow-hidden border border-gray-200 transition duration-200 hover:-translate-y-1 hover:shadow-lg hover:border-zoo-green focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zoo-green"
+              >
                 {animal.image_url && (
-                  <img
-                    src={animal.image_url}
-                    alt={animal.prenom}
-                    className="w-full h-52 object-cover"
-                  />
+                  <div className="overflow-hidden">
+                    <img
+                      src={animal.image_url}
+                      alt={animal.prenom}
+                      style={{ objectPosition: IMAGE_FOCUS[animal.prenom] ?? DEFAULT_FOCUS }}
+                      className="w-full h-56 object-cover transition duration-300 group-hover:scale-105"
+                    />
+                  </div>
                 )}
-                <div className="p-4 text-center">
-                  <h5 className="font-bold text-lg">{animal.prenom}</h5>
+                <div className="flex flex-col flex-1 p-4 text-center">
+                  <h5 className="font-bold text-lg text-zoo-green">{animal.prenom}</h5>
                   <p className="text-gray-500 text-sm">
                     {animal.race} - {animal.diet}
                   </p>
-                  <p className="text-sm mt-1">
+                  <p className="text-sm mt-1 text-gray-600">
                     {animal.description?.substring(0, 60)}...
                   </p>
-                  <ClickTracker animalId={animal.id} animalName={animal.prenom}>
-                    <Link
-                      href={`/animals/${animal.id}`}
-                      className="inline-block mt-3 bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 text-sm"
-                    >
-                      Learn More
-                    </Link>
-                  </ClickTracker>
+                  <span className="mt-auto pt-3 inline-flex items-center justify-center gap-1 text-sm font-medium text-zoo-green group-hover:text-zoo-green-hover">
+                    Learn More
+                    <span aria-hidden className="transition-transform duration-200 group-hover:translate-x-1">→</span>
+                  </span>
                 </div>
-              </div>
+              </ClickTracker>
             ))}
           </div>
         </div>

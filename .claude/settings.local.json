@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(grep -c \"SELECT id FROM habitats WHERE name = ''Savanna''\" d:/Dev/experiments/arcadia-zoo-management/supabase/seed-data.sql)",
+      "Bash(grep -c \"SELECT id FROM habitats WHERE name = ''Jungle''\" d:/Dev/experiments/arcadia-zoo-management/supabase/seed-data.sql)",
+      "Bash(grep -c \"SELECT id FROM habitats WHERE name = ''Wetlands''\" d:/Dev/experiments/arcadia-zoo-management/supabase/seed-data.sql)",
+      "Bash(grep -c \"SELECT id FROM habitats WHERE name = ''Tundra''\" d:/Dev/experiments/arcadia-zoo-management/supabase/seed-data.sql)",
+      "Bash(grep -c \"SELECT id FROM habitats WHERE name = ''Desert''\" d:/Dev/experiments/arcadia-zoo-management/supabase/seed-data.sql)",
+      "WebSearch",
+      "WebFetch(domain:unsplash.com)",
+      "WebFetch(domain:images.unsplash.com)",
+      "Read(//tmp/unsplash_check/**)"
+    ]
+  }
+}

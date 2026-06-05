@@ -24,7 +24,7 @@ BEGIN;
 -- ── SAVANNA ──────────────────────────────────────────────
 UPDATE animals SET image_url = 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a6/020_The_lion_king_Snyggve_in_the_Serengeti_National_Park_Photo_by_Giles_Laurent.jpg/3840px-020_The_lion_king_Snyggve_in_the_Serengeti_National_Park_Photo_by_Giles_Laurent.jpg'
   WHERE prenom = 'Kofi' AND species = 'Panthera leo';
-UPDATE animals SET image_url = 'https://upload.wikimedia.org/wikipedia/commons/9/9e/Giraffe_Mikumi_National_Park.jpg'
+UPDATE animals SET image_url = 'https://upload.wikimedia.org/wikipedia/commons/a/ac/Flickr_-_Rainbirder_-_Reticulated_Giraffe_drinking.jpg'
   WHERE prenom = 'Twiga' AND species = 'Giraffa camelopardalis';
 UPDATE animals SET image_url = 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/94/178_Male_African_bush_elephant_in_Etosha_National_Park_Photo_by_Giles_Laurent.jpg/3840px-178_Male_African_bush_elephant_in_Etosha_National_Park_Photo_by_Giles_Laurent.jpg'
   WHERE prenom = 'Nia' AND species = 'Loxodonta africana';
@@ -54,7 +54,7 @@ UPDATE animals SET image_url = 'https://upload.wikimedia.org/wikipedia/commons/t
   WHERE prenom = 'Baro' AND species = 'Tapirus terrestris';
 
 -- ── WETLANDS ─────────────────────────────────────────────
-UPDATE animals SET image_url = 'https://upload.wikimedia.org/wikipedia/commons/0/03/American_Alligator.jpg'
+UPDATE animals SET image_url = 'https://upload.wikimedia.org/wikipedia/commons/5/5e/Alligator_mississippiensis_defensive.jpg'
   WHERE prenom = 'Gator' AND species = 'Alligator mississippiensis';
 UPDATE animals SET image_url = 'https://upload.wikimedia.org/wikipedia/commons/a/aa/North-American-bullfrog1.jpg'
   WHERE prenom = 'Jumper' AND species = 'Lithobates catesbeianus';
