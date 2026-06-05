@@ -68,8 +68,8 @@ INSERT INTO habitats (name, image_url) VALUES
   ('Tundra',          'https://upload.wikimedia.org/wikipedia/commons/1/17/Greenland_scoresby-sydkapp2_hg.jpg'),
   ('Desert',          'https://images.unsplash.com/photo-1509316785289-025f5b846b35?w=800&q=80'),
   ('Mountain',        'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=800&q=80'),
-  ('Tropical Aviary', 'https://images.unsplash.com/photo-1552728089-57bdde30beb3?w=800&q=80'),
-  ('Aquatic Zone',    'https://images.unsplash.com/photo-1437622368342-7a3d73a34c8f?w=800&q=80')
+  ('Tropical Aviary', 'https://upload.wikimedia.org/wikipedia/commons/c/c2/Khao_Sok_primary_tropical_rainforest%2C_southern_Thailand.jpg'),
+  ('Aquatic Zone',    'https://upload.wikimedia.org/wikipedia/commons/d/d2/Arrecife_coralino_de_Roat%C3%A1n.jpg')
 ON CONFLICT (name) DO NOTHING;
 
 
@@ -601,7 +601,7 @@ INSERT INTO animals (
   'Herbivore',
   'The park''s desert ambassador. Sable demonstrates remarkable physiological adaptations to heat and water scarcity during keeper talks.',
   'Resilient, calm, enduring',
-  'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c4/Camelus_dromedarius_in_Nuweiba.jpg/3840px-Camelus_dromedarius_in_Nuweiba.jpg',
+  'https://upload.wikimedia.org/wikipedia/commons/0/0b/Camels_in_Dasht-e_Lar%2C_Alborz_mountains%2C_Kamardasht_Lar_%DA%86%D8%B1%D8%A7%DB%8C_%D8%B4%D8%AA%D8%B1%D9%87%D8%A7_%D8%AF%D8%B1_%DA%A9%D9%85%D8%B1%D8%AF%D8%B4%D8%AA_%D9%84%D8%A7%D8%B1_-_panoramio.jpg',
   'Camelus dromedarius',
   '40–50 years',
   '400–690 kg / 1.8–2.3 m to top of hump',
@@ -779,7 +779,7 @@ INSERT INTO animals (
   'Herbivore',
   'Atlas navigates the steep cliff faces of the mountain enclosure with confidence. The species was hunted to near-extinction by 1800 but recovered through conservation.',
   'Agile, social in season, bold climber',
-  'https://upload.wikimedia.org/wikipedia/commons/9/9b/003_Wild_Alpine_Ibex_Sunset_Creux_du_Van_Mont_Racine_Photo_by_Giles_Laurent.jpg',
+  'https://upload.wikimedia.org/wikipedia/commons/f/fe/Alpine_ibex_Cima_di_Terrarossa_7.jpg',
   'Capra ibex',
   '14–22 years',
   '67–117 kg / 75–90 cm at shoulder (males)',
@@ -797,7 +797,7 @@ INSERT INTO animals (
   'Herbivore',
   'Highly intelligent and extraordinarily vocal. Pearl has learned to mimic over a dozen keeper phrases and is a consistent visitor favourite.',
   'Highly intelligent, loud, extremely long-lived',
-  'https://upload.wikimedia.org/wikipedia/commons/a/a9/Cacatua_galerita_Tas_2.jpg',
+  'https://upload.wikimedia.org/wikipedia/commons/9/9d/Cacatua_galerita_Risdon.jpg',
   'Cacatua galerita',
   '40–70 years',
   '0.8–0.9 kg / 44–55 cm',
@@ -813,7 +813,7 @@ INSERT INTO animals (
   'Omnivore',
   'The most colourful bird in the aviary. Lori feeds primarily on pollen and nectar using a specialised brush-tipped tongue unique among parrots.',
   'Active, noisy, highly social',
-  'https://upload.wikimedia.org/wikipedia/commons/a/ad/Rainbow_lorikeet_%28Trichoglossus_moluccanus_moluccanus%29_Sydney.jpg',
+  'https://upload.wikimedia.org/wikipedia/commons/c/c5/Rainbow_lorikeet_%28Trichoglossus_moluccanus_moluccanus%29_Sydney_2.jpg',
   'Trichoglossus moluccanus',
   '15–25 years',
   '75–157 g / 25–30 cm',

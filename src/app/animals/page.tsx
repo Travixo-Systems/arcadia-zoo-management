@@ -7,10 +7,11 @@ export const dynamic = "force-dynamic";
 // crops the image. Falls back to DEFAULT_FOCUS for everything else.
 const DEFAULT_FOCUS = "center 30%";
 const IMAGE_FOCUS: Record<string, string> = {
-  Zazu: "top",     // ground hornbill — head sits high
-  Kondo: "top",    // gorilla — keep the face
-  Blizzard: "top", // arctic fox — face near top
-  Frost: "top",    // penguin — head near top
+  Zazu: "center 20%",     // ground hornbill — head sits high
+  Kondo: "center 15%",    // gorilla — keep the face
+  Blizzard: "center 25%", // arctic fox — face slightly above centre
+  Frost: "center 22%",    // penguin — head upper third
+  Pip: "center 45%",      // seahorse — body sits lower in frame
 };
 
 export default async function AnimalsPage() {
