@@ -86,7 +86,7 @@ UPDATE animals SET image_url = 'https://upload.wikimedia.org/wikipedia/commons/c
   WHERE prenom = 'Boreal' AND species = 'Ovibos moschatus';
 
 -- ── DESERT ───────────────────────────────────────────────
-UPDATE animals SET image_url = 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c4/Camelus_dromedarius_in_Nuweiba.jpg/3840px-Camelus_dromedarius_in_Nuweiba.jpg'
+UPDATE animals SET image_url = 'https://upload.wikimedia.org/wikipedia/commons/0/0b/Camels_in_Dasht-e_Lar%2C_Alborz_mountains%2C_Kamardasht_Lar_%DA%86%D8%B1%D8%A7%DB%8C_%D8%B4%D8%AA%D8%B1%D9%87%D8%A7_%D8%AF%D8%B1_%DA%A9%D9%85%D8%B1%D8%AF%D8%B4%D8%AA_%D9%84%D8%A7%D8%B1_-_panoramio.jpg'
   WHERE prenom = 'Sable' AND species = 'Camelus dromedarius';
 UPDATE animals SET image_url = 'https://upload.wikimedia.org/wikipedia/commons/9/9a/Meerkat_%28Suricata_suricatta%29_Tswalu.jpg'
   WHERE prenom = 'Mira' AND species = 'Suricata suricatta';
@@ -110,13 +110,13 @@ UPDATE animals SET image_url = 'https://upload.wikimedia.org/wikipedia/commons/c
   WHERE prenom = 'Talon' AND species = 'Aquila chrysaetos';
 UPDATE animals SET image_url = 'https://upload.wikimedia.org/wikipedia/commons/7/76/Sarlyk_Yak2.jpg'
   WHERE prenom = 'Yuki' AND species = 'Bos grunniens';
-UPDATE animals SET image_url = 'https://upload.wikimedia.org/wikipedia/commons/9/9b/003_Wild_Alpine_Ibex_Sunset_Creux_du_Van_Mont_Racine_Photo_by_Giles_Laurent.jpg'
+UPDATE animals SET image_url = 'https://upload.wikimedia.org/wikipedia/commons/f/fe/Alpine_ibex_Cima_di_Terrarossa_7.jpg'
   WHERE prenom = 'Atlas' AND species = 'Capra ibex';
 
 -- ── TROPICAL AVIARY ──────────────────────────────────────
-UPDATE animals SET image_url = 'https://upload.wikimedia.org/wikipedia/commons/a/a9/Cacatua_galerita_Tas_2.jpg'
+UPDATE animals SET image_url = 'https://upload.wikimedia.org/wikipedia/commons/9/9d/Cacatua_galerita_Risdon.jpg'
   WHERE prenom = 'Pearl' AND species = 'Cacatua galerita';
-UPDATE animals SET image_url = 'https://upload.wikimedia.org/wikipedia/commons/a/ad/Rainbow_lorikeet_%28Trichoglossus_moluccanus_moluccanus%29_Sydney.jpg'
+UPDATE animals SET image_url = 'https://upload.wikimedia.org/wikipedia/commons/c/c5/Rainbow_lorikeet_%28Trichoglossus_moluccanus_moluccanus%29_Sydney_2.jpg'
   WHERE prenom = 'Lori' AND species = 'Trichoglossus moluccanus';
 UPDATE animals SET image_url = 'https://upload.wikimedia.org/wikipedia/commons/b/b7/155_Southern_yellow-billed_hornbill_in_Etosha_National_Park_Photo_by_Giles_Laurent.jpg'
   WHERE prenom = 'Beak' AND species = 'Tockus leucomelas';
@@ -137,9 +137,16 @@ UPDATE animals SET image_url = 'https://upload.wikimedia.org/wikipedia/commons/f
 UPDATE animals SET image_url = 'https://upload.wikimedia.org/wikipedia/commons/2/25/Hippocampus_hippocampus_%28on_Ascophyllum_nodosum%29.jpg'
   WHERE prenom = 'Pip' AND species = 'Hippocampus hippocampus';
 
--- ── HABITAT BANNER FIX (Tundra banner was a dead Unsplash ID) ──
+-- ── HABITAT BANNER FIXES ──
+-- Tundra banner was a dead Unsplash ID.
 UPDATE habitats SET image_url = 'https://upload.wikimedia.org/wikipedia/commons/1/17/Greenland_scoresby-sydkapp2_hg.jpg'
   WHERE name = 'Tundra';
+-- Aquatic Zone & Tropical Aviary banners showed a single animal; swapped to
+-- scenic environment photos to match the other habitat banners.
+UPDATE habitats SET image_url = 'https://upload.wikimedia.org/wikipedia/commons/d/d2/Arrecife_coralino_de_Roat%C3%A1n.jpg'
+  WHERE name = 'Aquatic Zone';
+UPDATE habitats SET image_url = 'https://upload.wikimedia.org/wikipedia/commons/c/c2/Khao_Sok_primary_tropical_rainforest%2C_southern_Thailand.jpg'
+  WHERE name = 'Tropical Aviary';
 
 COMMIT;
 
