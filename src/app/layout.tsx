@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { Analytics } from "@/components/analytics";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { getSession } from "@/lib/auth";
@@ -21,6 +22,7 @@ export default async function RootLayout({
         <Header user={user} />
         <main className="flex-1">{children}</main>
         <Footer />
+        <Analytics />
       </body>
     </html>
   );
